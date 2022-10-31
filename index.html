@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <title>CityWeather</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: rgb(58, 148, 227);
+        font-size: 24px;
+        font-weight: 100;
+        line-height: 28px;
+        text-align: left;
+        margin: 0;
+    }
+
+    ul {
+        margin: 0 0 15px;
+        padding: 0;
+    }
+
+    li {
+        color: rgb(135, 135, 135);
+        font-size: 16px;
+        font-weight: 100;
+        height: 19px;
+        line-height: 1;
+        list-style: none;
+    }
+
+    .weather-app {
+        border: 1px solid rgb(58, 148, 227);
+        padding: 15px;
+        margin: 20px;
+        max-width: 600px;
+        border-radius: 20px;
+    }
+
+    .temperature {
+        color: rgb(58, 148, 227);
+        font-size: 60px;
+        font-weight: 500;
+        line-height: 1;
+    }
+
+    .units {
+        position: relative;
+        top: -32px;
+    }
+
+    .search-form {
+        margin-bottom: 15px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="weather-app">
+            <form class="search-form" id="search-form">
+                <div class="row">
+                    <div class="col-9">
+                        <input type="search" placeholder="Search for a city" class="form-control shadow-sm"
+                            autocomplete="off" autofocus="on" id="city-input" />
+                    </div>
+                    <div class="col-3">
+                        <input type="submit" value="Search" class="form-control btn btn-primary shadow-sm" />
+                    </div>
+                </div>
+            </form>
+
+            <h1 id="city">
+                New York
+            </h1>
+            <ul>
+                <li id="date"></li>
+                </li>
+                <li>
+                    Partly Cloudy
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-6">
+                    <div class="clearfix">
+                        <img src="https://ssl.gstatic.com/onebox/weather/48/rain.png" width="40"
+                            class="weather-icon float-left" />
+                        <div class="float-left">
+                            <span class="temperature">10º</span><span class="units">C|<a href="#">ºF</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <ul>
+                        <li>
+                            Precipitation:0%
+                        </li>
+                        <li>
+                            Humidity:0%
+                        </li>
+                        <li>
+                            Wind 15 km/h:80%
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+</body>
+<script>
+    function formatDate(date){
+         let hours = date.getHours();
+        if (hours < 10) {
+            hours = `0${hours}`;
+        }
+        let minutes = currentTime.getMinutes();
+        if (minutes < 10) {
+            minutes = `0${minutes}`;
+        }
+        let dayIndex = currentTime.getDay();
+        let days = [
+            "Sundya",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ];
+        let day=days[dayIndex];
+        return `${day}, ${hours}:${minutes}`;
+        
+    }
+    function search(event){
+        event.preventDefault();
+        let cityElement = document.querySelector("#city");
+        cityElement.innerHTML = "Paris";
+        let cityInput= document.querySelector("#city-input");
+        cityElement.innerHTML=cityInput.value;
+    }
+    let dateElement=document.querySelector("#date");
+    let currentTime=new Date();
+    
+  let searchForm=document.querySelector("#search-form");
+    searchForm.addEventListener("submit", search);
+
+    
+  dateElement.innerHTML=formatDate(currentTime);
+
+  
+</script>
+
+</html>
