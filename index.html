@@ -13,6 +13,7 @@
 <style>
     body {
         font-family: Arial, sans-serif;
+
     }
 
     h1 {
@@ -41,8 +42,8 @@
     .weather-app {
         border: 1px solid rgb(58, 148, 227);
         padding: 15px;
-        margin: 20px;
-        max-width: 600px;
+        margin: 15px;
+        max-width: 700px;
         border-radius: 20px;
     }
 
@@ -59,9 +60,31 @@
     }
 
     .search-form {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
+    .weather-forecast {
+        margin-top: 20px;
+        text-align: center;
+        color: rgb(135, 135, 135);
+    }
+
+    .weather-forecast-date {
+        font-size: 16px;
+        color: rgb(58, 148, 227);
+        text-align: center;
+    }
+
+    .weather-forecast-temperature {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .row {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+    }
 </style>
 
 <body>
@@ -92,12 +115,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="clearfix">
-                        <img src="https://ssl.gstatic.com/onebox/weather/48/rain.png" width="40"
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="70" id="icon"
                             class="weather-icon float-left" />
                         <div class="float-left">
                             <span class="temperature" id="temperature">10º</span><span class="units">C|<a
                                     href="#">ºF</a></span>
                         </div>
+                    </div>
+                    <div class="weather-forecast" id="forecast">
                     </div>
                 </div>
                 <div class="col-6">
@@ -114,8 +139,8 @@
                 </div>
             </div>
         </div>
-        
-    <a href="https://github.com/NastiiaR/Weather-app.git">👉🏻Open-source code </a>
+
+        <a href="https://github.com/NastiiaR/Weather-app.git">👉🏻Open-source code </a>
         ,by Anastasiia H.
 </body>
 <script>
@@ -142,6 +167,39 @@
         return `${day}, ${hours}:${minutes}`;
 
     }
+    function displayForecast() {
+        let forecastElement = document.querySelector("#forecast");
+
+        let forecastHTML = `<div class="row">`;
+
+        let days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
+        days.forEach(function (day) {
+            forecastHTML =
+                forecastHTML + `
+        
+                        <div class="col-2">
+                            <div class="weather-forecast-date">
+                            ${day}
+                            </div>
+                            <img 
+                            src="http://openweathermap.org/img/wn/10d@2x.png"
+                             width="42" 
+                             alt=""  />
+                            <div class="weather-forecast-temperature">
+                    <span class="weather-forecast-temperature-max">15º </span>
+                    <span class="weather-forecast-temperature-min">10º </span>
+                            </div>
+                            </div>
+                        
+                        `;
+        })
+
+
+        forecastHTML = forecastHTML + `</div>`;
+        forecastElement.innerHTML = forecastHTML;
+    }
+
+
 
     function displayWeatherCondition(response) {
         console.log(response.date);
@@ -167,6 +225,7 @@
 
 
     dateElement.innerHTML = formatDate(currentTime);
-
+    displayForecast();
 </script>
+
 </html>
